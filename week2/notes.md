@@ -29,9 +29,9 @@ real-time actions. maintaenance, downtime,money, time.
 ### Storage
 
 
-
-
-
+Bottom Layer: disk, memory
+Middle Layer: storage systems
+Top Layer: storage abstractions
 
 ### Queries, Modeling and Transformation
 
