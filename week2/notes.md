@@ -14,14 +14,20 @@
 
 - Batch vs Streaming
 
+Batch: based on predertermined time interval
+Based on preset size threshold
 
 
+Straming: new real-time,need to have a infra.
 
 
+What to consider 
 
+real-time actions. maintaenance, downtime,money, time.
 
 
 ### Storage
+
 
 
 
