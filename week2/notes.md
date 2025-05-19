@@ -35,5 +35,8 @@ Top Layer: storage abstractions
 
 ### Queries, Modeling and Transformation
 
+Choosing a coherent structure for your data to make it useful for the business.
+
+Data transformation: Data manipulated, enhanced and saved for downstream use.
 
 
