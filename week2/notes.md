@@ -42,5 +42,8 @@ Data transformation: Data manipulated, enhanced and saved for downstream use.
 
 ### Serving data
 
+Embedded Analytcs: external or customer-facing analytics
+
+
 
 
