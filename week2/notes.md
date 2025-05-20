@@ -61,7 +61,17 @@ Operational Analytics: Monitoring real-time data for immediate action
 
 - Defensive method [be cautious with sensistivie data, design for potenial attacks]
 
-- 
+### Data Management
 
+Is the development, execution and supervision of plans, progams and practices
+taht deliver control, protect and enhance the value of data and information
+assets throughout their life cycles.
+
+
+Data governance, is the first and foremost, a data manegemnt funciton to ensuire the
+quality, integrity, security and usability of data collected by organization 
+
+Data quality: accurate, complete, discovrable, available in a timely manner
+Low quality data: inaccurate, incomplete, hard to find, late
 
 
