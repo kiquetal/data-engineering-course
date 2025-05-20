@@ -44,6 +44,24 @@ Data transformation: Data manipulated, enhanced and saved for downstream use.
 
 Embedded Analytcs: external or customer-facing analytics
 
+Business Intelligence:  explore historical and current business data to discover
+insights.
+[campaing,spike]
+Operational Analytics: Monitoring real-time data for immediate action
+[real-time website perfomance metrics]
+
+### Introduction to the Undercurrents
+
+- Security: Principle of Least Privilees: give users or application access to only the services and only with a timestamp
+
+
+- Data sensitivity: mask
+
+- Is about people too
+
+- Defensive method [be cautious with sensistivie data, design for potenial attacks]
+
+- 
 
 
 
