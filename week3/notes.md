@@ -22,6 +22,8 @@ Ingest, transform, storage
 Data collected over a fixed period of time.
 
 ### Architecting for Compliance
-
+GDPR (general  data protectcion regulation)
+pii(personal identifiable information)
+right to have your data erased
 
 
