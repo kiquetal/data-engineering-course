@@ -95,11 +95,20 @@ It's a set of culture habits and practices
 Improves the development process and quality of data products.
 
 
+Automation, Observability and Monitoring, Incident Response
+
+
 
 ### Orchestration
 
+No only pure-scheduling
+
+Airflow
 
 ### Software engineering
+
+
+The design, development,deployment and maintenance of software applications
 
 
 
