@@ -17,8 +17,11 @@ a careful evaluation of trade-off
 - Embrace FinOps
 
 
-### Always architecting
-
-### When your systems fail
-
 ### Batch Architectures
+Ingest, transform, storage
+Data collected over a fixed period of time.
+
+### Architecting for Compliance
+
+
+
