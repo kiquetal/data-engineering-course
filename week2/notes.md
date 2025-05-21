@@ -78,9 +78,22 @@ Low quality data: inaccurate, incomplete, hard to find, late
 ### Data architecture
 
 Is the design of system to support the evolving data needs of an enterprise, achieved by flexible and reversible decisionr eached through a careful evaluation of trade-off
+Principles:
 
+- Choose common component wisely
+- Plan for failure
+- Architect for scalability
+- Architecture is leadership
+- Always be architecting 
+- Build loosely couple systems
+- Make reversible decisions
+- Priority security
+- Embrace FinOps
 
 ### DataOps
+It's a set of culture habits and practices
+Improves the development process and quality of data products.
+
 
 
 ### Orchestration
