@@ -16,3 +16,9 @@ a careful evaluation of trade-off
 - Prioritixze security
 - Embrace FinOps
 
+
+### Always architecting
+
+### When your systems fail
+
+### Batch Architectures
