@@ -75,3 +75,7 @@ Data quality: accurate, complete, discovrable, available in a timely manner
 Low quality data: inaccurate, incomplete, hard to find, late
 
 
+### Data architecture
+
+Is the design of system to support the evolving data needs of an enterprise, achieved by flexible and reversible decisionr eached through a careful evaluation of trade-off
+
