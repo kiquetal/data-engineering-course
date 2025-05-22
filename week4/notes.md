@@ -30,5 +30,8 @@ Build,evaluate, iteratate evolve
 - Learn about the existing solution
 - Learn about the pain-points.
 - Look for other stakeholders
+- Learn what actions will be executed using the data
+
+### 
 
 
