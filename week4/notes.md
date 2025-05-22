@@ -32,6 +32,7 @@ Build,evaluate, iteratate evolve
 - Look for other stakeholders
 - Learn what actions will be executed using the data
 
-### 
+
+###  
 
 
