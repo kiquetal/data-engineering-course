@@ -25,3 +25,10 @@ Choose tools & technology
 Build,evaluate, iteratate evolve
 
 
+### Key Elements of Requirementes Gathering
+
+- Learn about the existing solution
+- Learn about the pain-points.
+- Look for other stakeholders
+
+
