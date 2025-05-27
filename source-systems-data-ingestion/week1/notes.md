@@ -10,4 +10,4 @@ Unstructured data: data that does not have any predefined structure
 |Databases | Files  | Streaming systems|
 |----------|--------|------------------|
 |Structured data, semi-structured data| any | Semi-structured data|
-| CRUD | 
+| CRUD |  mp3,mp4,csv, unstrucstured, structured                   |                               | 
