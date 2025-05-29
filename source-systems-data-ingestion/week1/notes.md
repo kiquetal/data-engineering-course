@@ -14,4 +14,8 @@ Unstructured data: data that does not have any predefined structure
 
 
 
-### 
+### Lab
+
+Bucket policy to only allow from ec2 ip
+
+Read about interface endpoint 
