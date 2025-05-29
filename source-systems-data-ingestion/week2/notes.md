@@ -12,10 +12,15 @@ Data ingestion on a continium
 
 ### Batch Ingestion
 ETL vs ELT
-extract, transform, load
-ectract, load, transform
+[etl => Original bath pattern. raw-data then transform then you use destination]
+
+
+[elt => extract load transform]
+
 
 
 Batch- semi-frequent
 Microbatch-frequent
 Straming very frequent
+
+
