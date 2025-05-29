@@ -8,3 +8,11 @@ Troubleshooting
 and insert data directly to rds
 
 Data ingestion on a continium
+
+
+### Batch Ingestion
+ETL vs ELT
+extract, transform, load
+ectract, load, transform
+
+
