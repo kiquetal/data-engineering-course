@@ -9,7 +9,7 @@
    source venv/bin/activate
    ```
 
-2. **Install dependencies (including Jupyter Notebook)**
+:i2. **Install dependencies (including Jupyter Notebook)**
 
    ```bash
    pip install -r requirements.txt
