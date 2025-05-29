@@ -17,6 +17,10 @@ ETL vs ELT
 
 [elt => extract load transform]
 
+it's faster to implement
+It makes data available more quickly to end users.
+Tansformation can still be done efficiently
+
 
 
 Batch- semi-frequent
