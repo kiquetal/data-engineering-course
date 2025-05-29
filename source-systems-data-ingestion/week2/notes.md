@@ -16,3 +16,6 @@ extract, transform, load
 ectract, load, transform
 
 
+Batch- semi-frequent
+Microbatch-frequent
+Straming very frequent
