@@ -6,3 +6,5 @@ Using glue etl ingested some files to s3 week
 
 Troubleshooting
 and insert data directly to rds
+
+Data ingestion on a continium
