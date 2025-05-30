@@ -28,3 +28,16 @@ Microbatch-frequent
 Straming very frequent
 
 
+
+### Producers:
+
+Push data to kinesis data streams
+
+1 Stream => N shard
+
+size and rate of write and read operations TO obtain the number of shards.
+each shard up to 5 read operations=> 2MB read
+
+write 1MB per second
+
+
