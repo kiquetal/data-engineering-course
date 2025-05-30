@@ -40,4 +40,10 @@ each shard up to 5 read operations=> 2MB read
 
 write 1MB per second
 
+### Kinesis on-demand mode
 
+Scalling up or down.
+charly only when you use
+More convenient from an operation perspective
+
+Provisioned mode:
