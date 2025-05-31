@@ -47,3 +47,10 @@ charly only when you use
 More convenient from an operation perspective
 
 Provisioned mode:
+
+### Data record
+
+Parition key, sequence number, BLOB
+parition key => wich shard
+
+
