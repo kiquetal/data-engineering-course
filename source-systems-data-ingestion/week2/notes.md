@@ -58,3 +58,6 @@ parition key => wich shard
 ### Diagram ETL
 
 ![../../images/etl-diagram.png](../../images/etl-diagram.png)
+
+
+
