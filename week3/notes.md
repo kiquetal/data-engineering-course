@@ -27,3 +27,9 @@ pii(personal identifiable information)
 right to have your data erased
 
 
+
+### Provider
+
+Resource and Data Sources: read from external resource
+
+
