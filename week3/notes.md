@@ -32,4 +32,12 @@ right to have your data erased
 
 Resource and Data Sources: read from external resource
 
+```
+
+data "aws_subnet" "selected_subnet" {
+  id= "subnet-04542323"
+}
+```
+
+
 
