@@ -39,5 +39,8 @@ data "aws_subnet" "selected_subnet" {
 }
 ```
 
-
+resource "aws_instance" "webserver"{
+subnet_id = data.aws_subnet.selected_subnet.id
+instance_type= "t2.micro"
+}
 
