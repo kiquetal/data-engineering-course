@@ -33,6 +33,9 @@ Build,evaluate, iteratate evolve
 - Learn what actions will be executed using the data
 
 
-###  
+### XCOM
+cross-communication
+Designed to pass small amounts of data: metadata, dates, single value metrics, simple computations.
+  
 
 
