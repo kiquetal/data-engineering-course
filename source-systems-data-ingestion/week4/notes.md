@@ -11,4 +11,23 @@ When to use cron
 - In the prototyping phase
 
 
-###  
+### Advantages
+
+- Written in python
+- Open source is very active
+- Is available as managed service  
+
+
+### Challenges
+
+- Scalability challenge
+- Ensure integrity
+
+### Basics
+
+
+### AirFlow
+
+
+
+
