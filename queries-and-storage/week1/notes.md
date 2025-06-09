@@ -40,11 +40,14 @@ compressed file identify redudancy , improve query perfomance reduces the i/o ti
 
 #### Cloud Storage System
 
-Block: 
+Block: Perfomance and flexibility. Divides files into small, fixed-size blocks and store them on disk.
+ 
 
 
 Object:
 
 
 File: organize files into a directory tree
-  
+ensure directory contains metadata to reflect owner and some attribues
+
+efs-aws
