@@ -32,4 +32,19 @@ binary=parquet.avro
 paquer=column-base format
 avro=row-based format
 
-####  
+#### Compression
+
+encode characters based on their frequency
+
+compressed file identify redudancy , improve query perfomance reduces the i/o time needed to load data.
+
+#### Cloud Storage System
+
+Block: 
+
+
+Object:
+
+
+File: organize files into a directory tree
+  
