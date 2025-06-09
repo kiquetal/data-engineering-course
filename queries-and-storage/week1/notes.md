@@ -87,5 +87,15 @@ Each node has medium.
 
 Horizontal scaling.
 
+Higher fault tolerance and data durability
+High availability
+
+Long processing tasks.
+
+Methods for distributing data
+
+replication: for redundancy
+
+partitioning:  also sharding, different partition to a different nodes.
 
 
