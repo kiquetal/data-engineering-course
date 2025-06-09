@@ -69,4 +69,11 @@ efs-aws
 | ------------ | ------------  | -------------|
 | support data sharing, easy to manage with low perfomance and scalability requirements |  supports transactional workloads allows fequent read an write with low latency | supports analytical queries on massive datasets, offer high scalability and parrellal data processing |
 
-
+#### Storage Tiers
+|_ | Hot Storage | warm storage | cold storage | 
+|_ |----------  | ------------ | ------------ |
+|Access Frequency |very frequent | less frequent | infrequent |
+| Example | product recommendation applicaiton | regular reports and analysses | archive |
+| storage medium | ssd & memory |  magnetic disk or hybrid | low cost magneti disks |
+| storage cost | high | medium | low |
+| retrieval cost | low | medium | high |
