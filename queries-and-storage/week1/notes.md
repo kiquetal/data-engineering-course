@@ -77,3 +77,15 @@ efs-aws
 | storage medium | ssd & memory |  magnetic disk or hybrid | low cost magneti disks |
 | storage cost | high | medium | low |
 | retrieval cost | low | medium | high |
+
+
+####  How distributed storage systems work
+
+Group of nodes = cluster
+
+Each node has medium.
+
+Horizontal scaling.
+
+
+
