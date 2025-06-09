@@ -29,5 +29,7 @@ Data transfer speed limited by network perfmance
 csv,xml,json
 
 binary=parquet.avro
+paquer=column-base format
+avro=row-based format
 
-
+####  
