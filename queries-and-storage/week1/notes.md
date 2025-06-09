@@ -41,13 +41,32 @@ compressed file identify redudancy , improve query perfomance reduces the i/o ti
 #### Cloud Storage System
 
 Block: Perfomance and flexibility. Divides files into small, fixed-size blocks and store them on disk.
- 
+higher scalabaility
+ [ideal for frequent access and modificaiton]
+ [for virtual machines]
+ec2 uses ebs
+Object: Store immutable files as data objects in a flat structure
+
+to update the file you have to re-write the entire object.
+can scale horizontally
 
 
-Object:
+[storage layer of cloud data warehouses or data lakes]
+[storing data needed in OLAP systems]
+[machine learning pipelines]
 
+[no good for transaction workloads]
 
 File: organize files into a directory tree
 ensure directory contains metadata to reflect owner and some attribues
 
 efs-aws
+
+
+#### TABLLE
+
+| file storage | block storage | object storage|
+| ------------ | ------------  | -------------|
+| support data sharing, easy to manage with low perfomance and scalability requirements |  supports transactional workloads allows fequent read an write with low latency | supports analytical queries on massive datasets, offer high scalability and parrellal data processing |
+
+
