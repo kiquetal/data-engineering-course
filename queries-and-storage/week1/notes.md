@@ -106,4 +106,4 @@ Partition Tolerance:
 
 
 
-
+#### Object Storage: flat structure immutability
