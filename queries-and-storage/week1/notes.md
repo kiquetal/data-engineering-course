@@ -99,3 +99,11 @@ replication: for redundancy
 partitioning:  also sharding, different partition to a different nodes.
 
 
+CAP:
+Consistency.
+Availability.
+Partition Tolerance:
+
+
+
+
