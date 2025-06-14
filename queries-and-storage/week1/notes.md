@@ -117,7 +117,7 @@ A directory
 #### Block Storage: 
 File is splitted 
 #### Memory
+Memcached
+Redis
 
-
-
-##### Storage 
+#### Rows vs column 
