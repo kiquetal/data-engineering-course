@@ -109,3 +109,11 @@ Partition Tolerance:
 #### Object Storage: flat structure immutability
 
 Object key = /data/csv = /year=2025/
+
+
+#### File Storage
+A directory 
+
+#### Block Storage: 
+
+#### Memory
