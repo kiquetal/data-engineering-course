@@ -120,4 +120,10 @@ File is splitted
 Memcached
 Redis
 
-#### Rows vs column 
+#### Rows vs column
+
+Rows: 
+1 millon rows x 30 colums x 100 bytes per entry = 3G
+data transfers speed : 200MB/s
+Total transfer time 3GB/200MB/s = 15
+ 
