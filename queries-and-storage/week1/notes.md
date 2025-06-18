@@ -126,4 +126,7 @@ Rows:
 1 millon rows x 30 colums x 100 bytes per entry = 3G
 data transfers speed : 200MB/s
 Total transfer time 3GB/200MB/s = 15
+
+Columns:
+just one column!
  
