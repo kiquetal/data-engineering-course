@@ -115,5 +115,5 @@ Object key = /data/csv = /year=2025/
 A directory 
 
 #### Block Storage: 
-
+File is splitted 
 #### Memory
