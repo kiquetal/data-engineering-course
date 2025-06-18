@@ -129,4 +129,14 @@ Total transfer time 3GB/200MB/s = 15
 
 Columns:
 just one column!
+
+#### Vector Database
+
+Consists of numerical values arranged in an array
+ex: weather info, image data.
+Vector Embeddings: capture semantic meaning of an item, like a text document
+or image
+[Original data] => [vector embedding]
+=> [vector database]
+
  
