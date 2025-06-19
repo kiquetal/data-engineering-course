@@ -26,4 +26,15 @@ data marts: subset data-warehouse [simple denormalized schema]
 | - | high processing from MPP |
 | - | columnar storage |
 | - | separation of storage and compute | 
- 
+
+
+### Data lake- key architectural ideas
+
+Central repositoyr for storing large volumes of data
+No fixed schema or predefined set of transformations
+Schema on read pattern
+
+reader determines the schema when reading the data.
+
+storage = hadoop hdfs changing to s3.
+processing tools =  spark,apache pig,hive, presto
