@@ -37,4 +37,7 @@ Schema on read pattern
 reader determines the schema when reading the data.
 
 storage = hadoop hdfs changing to s3.
-processing tools =  spark,apache pig,hive, presto
+processing tools =  spark,apache pig,hive, prest
+
+
+data-swap: no data cataloing, no proper data manageement, no data discovery tools, no guarantee on the data integrity and quality, WERE PAINFUL to implement DML.
