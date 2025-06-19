@@ -139,4 +139,6 @@ or image
 [Original data] => [vector embedding]
 => [vector database]
 
- 
+Distance Metrics: uses a distance metric to find similar vectors
+not euclidean, 
+cosine distance,manhattan distance 
