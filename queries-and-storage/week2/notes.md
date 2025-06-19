@@ -17,4 +17,13 @@ extraction -> staging area -> transformation-model data -> data warehouse
 
 data marts: subset data-warehouse [simple denormalized schema]
 
+### Table
+
+| traditional data warehouse | cloud data warehouse| 	
+| -------------------------- | ------------------- |
+| Stored data is highly structured | Stored data is highly structured|
+| Data modeled to enable analytical queries | Data modeled to enable analytical queries| 
+| - | high processing from MPP |
+| - | columnar storage |
+| - | separation of storage and compute | 
  
