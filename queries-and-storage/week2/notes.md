@@ -40,4 +40,9 @@ storage = hadoop hdfs changing to s3.
 processing tools =  spark,apache pig,hive, prest
 
 
-data-swap: no data cataloing, no proper data manageement, no data discovery tools, no guarantee on the data integrity and quality, WERE PAINFUL to implement DML.
+data-swap: no data cataloing, no proper data manageement, no data discovery tools, no guarantee on the data integrity and quality, WERE PAINFUL to implement DMLno schema management and data modeling
+
+### Data Zones: Used to organize dat in a data lake, where each zone
+houses data that has been processed to varying degrees.
+
+landing/raw -> storage{cleaned,transformed} -> enriched
