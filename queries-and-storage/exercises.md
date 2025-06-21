@@ -523,3 +523,101 @@ FROM
     dim_staff
 
 ```
+
+
+#### Exercise 9.1 - (Optional)
+
+Join the `fact_rental` and `dim_film` tables through the `film_id`, and select the film `title` and `rating` from `dim_film`. Then take the `SUM()` of the `fact_rental.amount` column as `amount`. Group by `title` and `rating`. Limit your result to 10 rows.
+
+```sql
+SELECT
+    dim_film.title,
+    dim_film.rating,
+    SUM(fact_rental.amount) AS amount
+
+FROM
+    fact_rental
+    INNER JOIN dim_film ON dim_film.film_id = fact_rental.film_id
+GROUP BY
+    dim_film.title,
+    dim_film.rating
+LIMIT 10;
+
+```
+
+#### Exercise 9.2 - (Optional)
+
+Create a CTE named `movies_amount_rating` with the previous query (without the `LIMIT` statement). As query expression, select the `title`, `rating`, `amount` and use the [`RANK()`](https://www.geeksforgeeks.org/mysql-ranking-functions/) window function to assign a rank to each row based on a partition over the `rating` and ordered by the `amount` in descending order. Name this last column as `rank_movies`. Limit your results to 10.
+
+```sql
+%%sql
+WITH movies_amount_rating AS(
+    SELECT
+        dim_film.title,
+        dim_film.rating,
+        SUM(fact_rental.amount) AS amount
+    FROM
+        fact_rental
+        INNER JOIN dim_film ON fact_rental.film_id = dim_film.film_id
+    GROUP BY
+        title,
+        rating
+)
+SELECT
+    title,
+    rating,
+    amount,
+    RANK() over (
+        PARTITION BY rating
+        ORDER BY
+            amount DESC
+    ) AS rank_movies
+FROM
+    movies_amount_rating
+LIMIT 10;
+
+```
+
+#### Exercise 9.3 - (Graded)
+
+Create a new CTE named `movies_ranking` with the previous query expression (do not include the `LIMIT`); you should have 2 CTEs at this point. As a query expression, select the `title`, `rating`, `amount` from `movies_ranking`; filter to get only the `rank_movies` equals to 1. This will give you the final result for this exercise.
+
+
+```sql
+
+%%sql
+WITH movies_amount_rating AS(
+    SELECT
+        dim_film.title,
+        dim_film.rating,
+        SUM(fact_rental.amount) AS amount
+    FROM
+        fact_rental
+        INNER JOIN dim_film ON dim_film.film_id = fact_rental.film_id
+    GROUP BY
+        title,
+        rating
+),
+movies_ranking AS (
+    SELECT
+        title,
+        rating,
+        amount,
+        RANK() over (
+            PARTITION BY rating
+            ORDER BY
+                amount DESC
+        ) AS rank_movies
+    FROM
+        movies_amount_rating
+)
+SELECT
+    title,
+    rating,
+    amount
+FROM
+    movies_ranking
+WHERE
+    rank_movies = 1;
+
+```
