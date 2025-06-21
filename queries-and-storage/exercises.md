@@ -466,3 +466,21 @@ ORDER BY
 LIMIT 10;
 
 ```
+
+
+### Exercise 7
+
+Write an SQL query to get the customers who made a payment on `2007-04-30` between `15:00` and `16:00`. Get the customer id and create a column that shows `On time` if the rental return was within the borrow time limit, and `Late` if it was overdue.
+
+- You will need to join the `fact_rental` table with:
+  - `dim_customer` table on the `customer_id`.
+  - `dim_film` table on the `film_id`.
+- At the `SELECT` clause add `dim_customer.customer_id`. Then use a `CASE WHEN` statement to differentiate between the `On time` and `Late` rentals. In that statement, you will use the `TIMEDIFF` function to compare the return and rental dates. Use the `EXTRACT` function to get the hour from the previous result:
+
+    ```sql
+    EXTRACT(HOUR FROM TIMEDIFF(fact_rental.return_date, fact_rental.rental_date))
+    ```
+
+  Compare this with the `rental_duration` from the `dim_film` table. Take into account that extracting the hour from a `TIMEDIFF` will give you a result in hours, while the rental duration is in days so you will have to multiply the rental duration by 24 to keep the same units.
+- Filter your results so that the `fact_rental.payment_date` was BETWEEN `2007-04-30 15:00:00` and `2007-04-30 16:00:00`.
+- Order your results by the `dim_customer.customer_id`.
