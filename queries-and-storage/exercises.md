@@ -216,6 +216,42 @@ ORDER BY
 
 Write an SQL query to get the maximum purchase amount by customers on `2007-04-30` between `15:00` and `16:00`. Obtain the customer's full name in capital letters, the maximum purchase amount, and the payment date. Then, create a column called `value_rate`, and assign the `low` label if the amount is between 0 and 3, the `mid` label if it is between 3 and 6, and the `high` label if it is above 6. Sort by the maximum purchase amount in descending order and full name in ascending order.
 
+```sql
+
+SELECT
+    CONCAT(UPPER(first_name), ' ', UPPER(last_name)) AS full_name,
+    MAX(amount) AS max_amount,
+    DATE(payment_date) AS payment_date,
+    CASE
+        WHEN MAX(amount) BETWEEN 0 AND 3 THEN 'low'
+        WHEN MAX(amount) BETWEEN 3 AND 6 THEN 'mid'
+        WHEN MAX(amount) > 6 THEN 'high'
+    END AS value_rate
+FROM
+    fact_rental
+    INNER JOIN dim_customer ON dim_customer.customer_id = fact_rental.customer_id
+WHERE
+    payment_date BETWEEN '2007-04-30 15:00:00' AND '2007-04-30 16:00:00'
+GROUP BY
+    dim_customer.customer_id,
+    DATE(payment_date)
+ORDER BY
+    max_amount DESC,
+    full_name ASC
+;
+
+```
+Obtain from the colum "payment_date" the date without hours, use DATE() function and name the resulting column as "payment_date". Constrain your results to the date times between '2007-04-30 15:00:00' and '2007-04-30 16:00:00'. Remember to group by the customer identifier and by the payment_date (only date, without hours)
+```sql
+
+Select DATE(payment_date, '%Y-%m-%d') as payment_date
+
+```
+
+
+
+
+### Exercise 4.1 - (Optional)s
 Start by creating a query to extract from the `fact_rental` table these columns: the customer ID, the maximum `amount` named as `max_amount` (use function `MAX()`) and from `payment_date` column get only the date without hours. Use function `DATE()` naming the resulting column as `payment_date`. Constrain your results to the date times between '2007-04-30 15:00:00' and '2007-04-30 16:00:00'. Remember to group by the customer identifier and by the `payment_date`(only date, without hours, so the `DATE()` function should be applied there as well).
 
 Limit the output to 10 records just for this optional exercise.
