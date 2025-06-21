@@ -51,3 +51,55 @@ ORDER BY
     film_id
 LIMIT 10;
 ```
+#### Exercise 2.2 - (Optional)
+
+Let's practice writing Common Table Expressions (CTEs). Use optional exercise 2.1 without the `LIMIT` and `ORDER BY` statements as the code base to create a temporary result table named `film_category`. From the CTE `film_category`, select the `category_id` and aggregate the number of films in each category using the `COUNT()` function. Name the output column as `films`. Perform grouping by `category_id`. To check your result against the expected output, add the `ORDER BY` column `category_id` and `LIMIT` for the top 10 rows.
+
+```sql
+WITH film_category AS (
+    SELECT DISTINCT 
+        category_id,
+        film_id
+    FROM
+        fact_rental
+)
+SELECT
+    category_id,
+    count(film_id) AS films
+FROM
+    film_category
+GROUP BY
+    category_id
+ORDER BY
+    category_id
+LIMIT 10;
+
+```
+
+To calculate the average number of unique films from all categories, `average_by_category`, use the CTE `film_category_count`, averaging all the film counts with the `AVG()` function applied to `films` column.
+
+```sql
+WITH film_category AS (
+    SELECT DISTINCT 
+        category_id,
+        film_id
+    FROM
+        fact_rental
+),
+film_category_count AS (
+    SELECT
+        category_id,
+        count(film_id) AS films
+    FROM
+        film_category
+    GROUP BY
+        category_id
+    ORDER BY
+        category_id
+)
+SELECT
+    avg(films) AS average_by_category
+FROM
+    film_category_count;
+
+```
