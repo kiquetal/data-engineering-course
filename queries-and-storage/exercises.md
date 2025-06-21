@@ -257,4 +257,72 @@ Start by creating a query to extract from the `fact_rental` table these columns:
 Limit the output to 10 records just for this optional exercise.
 
 
+```
 
+SELECT
+    customer_id,
+    max(amount) AS max_amount,
+    DATE(payment_date) AS payment_date
+FROM
+    fact_rental
+WHERE
+    payment_date BETWEEN '2007-04-30 15:00:00'
+    AND '2007-04-30 16:00:00'
+GROUP BY
+    customer_id,
+    DATE(payment_date)
+LIMIT 10;
+
+```
+
+#### Exercise 4.2 - (Graded)
+
+Use the previous query as a CTE `max_amount_customer` (without the `LIMIT` statement). Then, create a query expression following these steps:
+- Join the `dim_customer` table with the CTE result on the `customer_id` column.
+- Review how [`CONCAT`](https://www.w3schools.com/sql/func_mysql_concat.asp) and [`UPPER`](https://www.w3schools.com/sql/func_mysql_upper.asp) functions are used in the `SELECT` statement to get the full name in capital letters.
+- Extract the `max_amount` and `payment_date`.
+- Use a `CASE WHEN` clause and compare the `max_amount` column with the corresponding values.
+- Order by the `max_amount` in a descending way while order by `full_name` in an ascending way.
+
+This should give you the expected final result.
+
+```sql
+
+%%sql
+WITH max_amount_customer AS (
+    SELECT
+        customer_id,
+        max(amount) AS max_amount,
+        DATE(payment_date) AS payment_date
+    FROM
+        fact_rental
+    WHERE
+        payment_date BETWEEN '2007-04-30 15:00:00'
+        AND '2007-04-30 16:00:00'
+    GROUP BY
+        customer_id,
+        DATE(payment_date)
+)
+SELECT
+    CONCAT(
+        UPPER(dim_customer.first_name),
+        ' ',
+        UPPER(dim_customer.last_name)
+    ) AS full_name,
+    max_amount,
+    payment_date,
+    CASE
+        WHEN max_amount >= 0
+        AND max_amount < 3 THEN 'low'
+        WHEN max_amount >= 3
+        AND max_amount < 6 THEN 'mid'
+        WHEN max_amount >= 6 THEN 'high'
+    END AS value_rate
+FROM
+    max_amount_customer
+    INNER JOIN dim_customer ON dim_customer.customer_id = max_amount_customer.customer_id
+ORDER BY
+    max_amount DESC,
+    full_name ASC;
+
+```
