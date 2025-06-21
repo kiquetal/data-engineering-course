@@ -210,3 +210,15 @@ WHERE
 ORDER BY
     category;
 ```
+
+
+### Exercise 4
+
+Write an SQL query to get the maximum purchase amount by customers on `2007-04-30` between `15:00` and `16:00`. Obtain the customer's full name in capital letters, the maximum purchase amount, and the payment date. Then, create a column called `value_rate`, and assign the `low` label if the amount is between 0 and 3, the `mid` label if it is between 3 and 6, and the `high` label if it is above 6. Sort by the maximum purchase amount in descending order and full name in ascending order.
+
+Start by creating a query to extract from the `fact_rental` table these columns: the customer ID, the maximum `amount` named as `max_amount` (use function `MAX()`) and from `payment_date` column get only the date without hours. Use function `DATE()` naming the resulting column as `payment_date`. Constrain your results to the date times between '2007-04-30 15:00:00' and '2007-04-30 16:00:00'. Remember to group by the customer identifier and by the `payment_date`(only date, without hours, so the `DATE()` function should be applied there as well).
+
+Limit the output to 10 records just for this optional exercise.
+
+
+
