@@ -372,4 +372,97 @@ Using previous results, write an SQL query to create a pivot table that shows th
 
 This approach ensures that each customer's total spending in each category is accurately pivoted into separate columns.
 
+```sql
+%%sql
+WITH customer_category_sum AS (
+    SELECT
+        CONCAT(
+            dim_customer.first_name,
+            ' ',
+            dim_customer.last_name
+        ) AS full_name,
+        dim_category.name AS category,
+        sum(fact_rental.amount) AS amount
+    FROM
+        fact_rental
+        INNER JOIN dim_customer ON dim_customer.customer_id= fact_rental.customer_id
+        INNER JOIN dim_category ON dim_category.category_id = fact_rental.category_id
+    GROUP BY
+        full_name,
+        category
+    ORDER BY
+        full_name,
+        category,
+        amount
+)
+SELECT
+    full_name,
+    MAX(
+        CASE
+            WHEN category = 'Family' THEN amount
+            ELSE 0
+        END
+    ) AS "Family",
+    MAX(
+        CASE
+            WHEN category = 'Games' THEN amount
+            ELSE 0
+        END
+    ) AS "Games",
+    MAX(
+        CASE
+            WHEN category = 'Animation' THEN amount
+            ELSE 0
+        END
+    ) AS "Animation",
+    MAX(
+        CASE
+            WHEN category = 'Classics' THEN amount
+            ELSE 0
+        END
+    ) AS "Classics",
+    MAX(
+        CASE
+            WHEN category = 'Documentary' THEN amount
+            ELSE 0
+        END
+    ) AS "Documentary",
+    MAX(
+        CASE
+            WHEN category = 'Sports' THEN amount
+            ELSE 0
+        END
+    ) AS "Sports",
+    MAX(
+        CASE
+            WHEN category = 'New' THEN amount
+            ELSE 0
+        END
+    ) AS "New",
+    MAX(
+        CASE
+            WHEN category = 'Children' THEN amount
+            ELSE 0
+        END
+    ) AS "Children",
+    MAX(
+        CASE
+            WHEN category = 'Music' THEN amount
+            ELSE 0
+        END
+    ) AS "Music",
+    MAX(
+        CASE
+            WHEN category = 'Travel' THEN amount
+            ELSE 0
+        END
+    ) AS "Travel"
+FROM
+    customer_category_sum
+GROUP BY
+    full_name
+ORDER BY
+    full_name
+LIMIT 10;
 
+```
