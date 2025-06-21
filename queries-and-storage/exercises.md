@@ -651,4 +651,37 @@ ORDER BY
     dim_film.film_id
 LIMIT 20;
 
+
+```
+
+#### Exercise 10.2 - (Optional)
+
+Create a CTE with the previous query and name it `actor_film` (without the `ORDER BY` and `LIMIT` statements). Then, in the query expression select the `actor_id`, `first_name`, `last_name` and count the number of films from the `actor_film` CTE result with the function `COUNT(*)` giving the column name `films`. Remember to group by the `actor_id`. Limit your results to 10 rows. To compare with the expected output, you can order by `actor_id`.
+
+```sql
+%%sql
+WITH actor_film AS (
+    SELECT DISTINCT 
+        dim_actor.actor_id,
+        dim_actor.first_name,
+        dim_actor.last_name,
+        dim_film.film_id
+    FROM
+        dim_actor    
+        INNER JOIN bridge_actor ON dim_actor.actor_id = bridge_actor.actor_id
+        INNER JOIN fact_rental ON fact_rental.rental_id = bridge_actor.rental_id
+        INNER JOIN dim_film ON fact_rental.film_id = dim_film.film_id
+)
+SELECT
+    actor_id,
+    first_name,
+    last_name,
+    COUNT(*) AS films
+FROM
+    actor_film
+GROUP BY
+    actor_id
+ORDER BY
+    actor_id
+    LIMIT 10;
 ```
