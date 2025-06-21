@@ -132,3 +132,81 @@ SELECT
 FROM
     film_category_count;
 ```
+
+#### Exercise 3.2 - (Optional)
+
+Use the same two CTEs `film_category` and `film_category_count`. Then, select all columns from `film_category_count`. Create a condition where you will compare the `films` column with the result of the main query that you created in the previous optional exercise 3.1, but now you will use it as a subquery and you won't need to rename the column as `average_by_category`.
+
+```sql
+WITH film_category AS (
+    SELECT DISTINCT 
+        category_id,
+        film_id
+    FROM fact_rental
+),
+film_category_count AS (
+    SELECT
+        category_id,
+        count(film_id) AS films
+    FROM
+        film_category
+    GROUP BY
+        category_id
+    ORDER BY
+        category_id
+)
+SELECT
+    * 
+FROM
+    film_category_count
+WHERE
+    films > (SELECT CEIL(avg(films)) FROM film_category_count);
+```
+
+
+#### Exercise 3.3 - (Graded)
+
+In the previous optional exercise, you've got nearly the final result, but now you need to load the category names instead of the IDs.
+- Take the query from the optional exercise 3.2.
+- Delete `ORDER BY` statements in both of the CTEs.
+- Add `INNER JOIN` statement into the CTE `film_category` joining the `fact_rental` table with the table `dim_category` based on the `category_id`. In the same CTE change the selection of `category_id` to `dim_category.category_id` and add `dim_category.name category,` to pull the category name as a `category` column.
+- In the CTE `film_category_count` select also `category` in addition to `category_id`.
+- In the very last selection exchange `*` with the `category` and `films`. You can also add `ORDER BY` statement using `category` column.
+
+This should give you the final result.
+
+```sql
+WITH film_category AS (
+    SELECT DISTINCT 
+        dim_category.category_id,
+        dim_category.name AS category,
+        film_id
+    FROM
+        fact_rental
+        INNER JOIN dim_category ON dim_category.category_id = fact_rental.category_id
+),
+film_category_count AS (
+    SELECT
+        category_id,
+        category,
+        count(film_id) AS films
+    FROM
+        film_category
+    GROUP BY
+        category_id
+)
+SELECT
+    category,
+    films
+FROM
+    film_category_count
+WHERE
+    films > (
+        SELECT
+            ceil(avg(films))
+        FROM
+            film_category_count
+    )
+ORDER BY
+    category;
+```
