@@ -103,3 +103,32 @@ FROM
     film_category_count;
 
 ```
+
+#### Exercise 3.1 - (Optional)
+
+Start by using the following two CTEs from the previous exercise 2: `film_category` and `film_category_count`. Then from the `film_category_count` CTE, select the average number of films, but enclose this result inside the `CEIL` function. Name this result as `average_by_category`.
+
+```sql
+WITH film_category AS (
+    SELECT DISTINCT 
+        category_id,
+        film_id
+    FROM fact_rental
+        
+),
+film_category_count AS (
+    SELECT
+        category_id,
+        count(film_id) AS films
+    FROM
+        film_category
+    GROUP BY
+        category_id
+    ORDER BY
+        category_id
+)
+SELECT
+    CEIL(avg(films)) AS avergate_by_category
+FROM
+    film_category_count;
+```
