@@ -484,3 +484,42 @@ Write an SQL query to get the customers who made a payment on `2007-04-30` betwe
   Compare this with the `rental_duration` from the `dim_film` table. Take into account that extracting the hour from a `TIMEDIFF` will give you a result in hours, while the rental duration is in days so you will have to multiply the rental duration by 24 to keep the same units.
 - Filter your results so that the `fact_rental.payment_date` was BETWEEN `2007-04-30 15:00:00` and `2007-04-30 16:00:00`.
 - Order your results by the `dim_customer.customer_id`.
+
+```sql
+%%sql
+SELECT
+    dim_customer.customer_id,
+    CASE
+        WHEN (EXTRACT(HOUR FROM timediff(fact_rental.return_date, fact_rental.rental_date))) > dim_film.rental_duration * 24 THEN 'Late'
+        ELSE 'On time'
+    END AS delivery    
+FROM
+    fact_rental
+    INNER JOIN dim_customer ON dim_customer.customer_id = fact_rental.customer_id
+    INNER JOIN dim_film ON dim_film.film_id = fact_rental.film_id
+WHERE
+    fact_rental.payment_date BETWEEN '2007-04-30 15:00:00'
+    AND '2007-04-30 16:00:00'
+ORDER BY
+    dim_customer.customer_id
+;
+
+```
+
+<a id='ex08'></a>
+### Exercise 8
+
+Write an SQL query to get the initials of the staff using the `first_name` and `last_name` columns. Use `CONCAT()` function to join the substrings.
+
+*Example*: John Lennon -> JL
+
+```sql
+SELECT
+    CONCAT(
+        UPPER(SUBSTRING(first_name, 1, 1)),
+        UPPER(SUBSTRING(last_name, 1, 1))
+    ) AS initials
+FROM
+    dim_staff
+
+```
