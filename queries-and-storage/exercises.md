@@ -361,3 +361,15 @@ LIMIT 30;
 
 ```
 
+### Exercise 6
+
+Using previous results, write an SQL query to create a pivot table that shows the total amount spent for each customer in each category. Also, fill the null values with a 0.
+
+- Use the query from the previous exercise as a CTE (without the `LIMIT` statement); name it as `customer_category_sum`.
+- In the query expression select the `full_name` of each customer. Then, for each category, use a `MAX()` function combined with a `CASE WHEN` statement to select the `amount` for that category or return 0 if the category doesn't match. For example, if the category is `Family`, the statement should look like `MAX(CASE WHEN category = 'Family' THEN amount ELSE 0 END) AS "Family"`.
+- Group and order by the customer's `full_name`.
+- Limit your results to 10 rows.
+
+This approach ensures that each customer's total spending in each category is accurately pivoted into separate columns.
+
+
