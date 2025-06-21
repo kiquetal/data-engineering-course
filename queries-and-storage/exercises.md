@@ -685,3 +685,191 @@ ORDER BY
     actor_id
     LIMIT 10;
 ```
+
+
+#### Exercise 10.3 - (Optional)
+
+Alongside the `actor_film` CTE, add the previous query as `actor_film_count` (without the `ORDER BY` and `LIMIT` statements). In the query expression, select the actor's first and last name (`first_name` and `last_name`), also the count of films `films` and use the `ROW_NUMBER()` window function over a window ordered by the film count in descending order and by the first and last name in ascending order; name this column as `actor_rank`. Limit this result to 10.
+```sql
+%%sql
+WITH actor_film AS (
+    SELECT DISTINCT 
+        dim_actor.actor_id,
+        dim_actor.first_name,
+        dim_actor.last_name,
+        dim_film.film_id
+    FROM
+        dim_actor    
+        INNER JOIN bridge_actor ON dim_actor.actor_id = bridge_actor.actor_id
+        INNER JOIN fact_rental ON fact_rental.rental_id = bridge_actor.rental_id
+        INNER JOIN dim_film ON fact_rental.film_id = dim_film.film_id
+),
+actor_film_count AS (
+SELECT
+    actor_id,
+        first_name,
+        last_name,
+        COUNT(*) AS films
+FROM
+    actor_film
+GROUP BY
+    actor_id
+)
+SELECT
+    first_name,
+    last_name,
+    films,
+    ROW_NUMBER() over (
+        ORDER BY
+           films DESC, first_name, last_name ASC
+    ) AS actor_rank
+FROM
+    actor_film_count
+LIMIT 10;
+```
+
+#### Exercise 10.4 - (Graded)
+
+Create a third CTE statement named `actors_rank` using the previous query expression (without the `LIMIT` statement). Then, select all columns from the `actors_rank` result and filter by the top 10 actors with the help of the `actor_rank` column. Order by `actor_rank` in ascending way. This will give the final result for this exercise.
+
+```sql
+%%sql
+WITH actor_film AS (
+    SELECT DISTINCT 
+        dim_actor.actor_id,
+        dim_actor.first_name,
+        dim_actor.last_name,
+        dim_film.film_id
+    FROM
+        dim_actor    
+        INNER JOIN bridge_actor ON dim_actor.actor_id = bridge_actor.actor_id
+        INNER JOIN fact_rental ON fact_rental.rental_id = bridge_actor.rental_id
+        INNER JOIN dim_film ON fact_rental.film_id = dim_film.film_id
+),
+actor_film_count AS (
+SELECT
+    actor_id,
+        first_name,
+        last_name,
+        COUNT(*) AS films
+FROM
+    actor_film
+GROUP BY
+    actor_id
+),
+actors_rank AS (
+SELECT
+    first_name,
+    last_name,
+    films,
+    ROW_NUMBER() over (
+        ORDER BY
+           films DESC, first_name, last_name ASC
+    ) AS actor_rank
+FROM
+    actor_film_count
+)
+SELECT
+    *
+FROM
+    actors_rank
+WHERE
+    actor_rank <= 10
+ORDER BY
+    actor_rank ASC;
+
+```
+
+#### Exercise 11.1 - (Optional)
+
+Taking the `fact_rental` table, use the `EXTRACT()` function to obtain the `MONTH` from the `payment_date` column. Then, name the new column as `month`. Use the `SUM()` function over the column `amount` and name the resulting column as `amount`. Filter the corresponding `customer_id` and where `payment_date` is `NOT NULL`. Group by `month`. Order by `month` to compare with the expected output.
+
+```sql
+%%sql
+SELECT
+    EXTRACT(MONTH FROM payment_date) AS month,
+    SUM(amount) AS amount
+FROM
+    fact_rental
+WHERE
+    customer_id = 388
+  AND payment_date IS NOT NULL
+GROUP BY
+    month
+ORDER BY
+    month
+```
+
+#### Exercise 11.2 - (Graded)
+
+With the previous query, create a CTE named `total_payment_amounts_sum` (do not include the `ORDER BY` statement). In the query expression, extract the `month` and `amount` columns. Then, use the [`LAG`](https://www.geeksforgeeks.org/mysql-lead-and-lag-function/) function and set the first parameter as the `amount` column and the second parameter as 1; this function will work over a window ordered by month and this should be named `previous_month_amount`.
+Take the difference between the result of the `LAG` function with the same parameters and over the same window, and the current value of `amount`. Set the name for this value as `difference`. This will give you the final result for this exercise.
+
+```sql
+%%sql
+WITH total_payment_amounts_sum AS (
+    SELECT
+        EXTRACT(MONTH FROM payment_date) AS month,
+        SUM(amount) AS amount
+    FROM
+        fact_rental
+    WHERE
+        customer_id = 388
+        AND payment_date IS NOT NULL
+    GROUP BY
+        month
+)
+SELECT
+    month,
+    amount,
+    LAG(amount, 1) OVER (
+    ORDER BY
+    month
+    ) AS previous_month_amount,
+    LAG(amount, 1) OVER (
+    ORDER BY
+    month
+    ) - amount AS difference
+FROM
+    total_payment_amounts_sum;
+
+```
+
+<a id='ex12'></a>
+#### Exercise 12
+
+Filtering rental orders with payments, write an SQL query to get the amount spent by month of the `customer_id` `388`. Get the total amount of the current month and the total amount of the next month (name it as `next_month_amount`), then calculate the difference between those values.
+
+To complete this exercise, you can follow the same process as in the previous exercise, but change the `LAG` function with the `LEAD` function.
+
+```sql
+%%sql
+
+WITH total_payment_amounts_sum AS (
+    SELECT
+        EXTRACT(MONTH FROM payment_date) AS month,
+        SUM(amount) AS amount
+    FROM
+        fact_rental
+    WHERE
+        customer_id = 388
+        AND payment_date IS NOT NULL
+    GROUP BY
+        month
+)
+SELECT
+    month,
+    amount,
+    LEAD(amount, 1) OVER (
+        ORDER BY
+            month
+    ) AS next_month_amount,
+    LEAD(amount, 1) OVER (
+        ORDER BY
+            month
+    ) - amount AS difference
+FROM
+    total_payment_amounts_sum;
+
+```
+
