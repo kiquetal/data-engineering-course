@@ -326,3 +326,38 @@ ORDER BY
     full_name ASC;
 
 ```
+
+### Exercise 5
+
+Based on rental orders, write an SQL query to get the customer's full name, film category, and payment amount by customer and film category. Sort the results by the customer's full name, film category, and payment amount in ascending order.
+
+- Use the `fact_rental` table as the main table for the queries. You will have to join with two additional tables in the following way:
+  - Join `fact_rental` with `dim_customer` by the `customer_id`.
+  - Join `fact_rental` with `dim_category` by the `category_id`.
+  - All joins must be inner joins.
+- In the `SELECT` clause, use the `CONCAT` function to join the first and last name of each customer.
+- Select the `dim_category.name` as `category` and sum the `amount` column, naming it as `amount`.
+- Group by `full_name` and `category` columns; order by `full_name`,  `category` and `amount`.
+- Limit your results to 30 rows.
+
+
+```sql
+SELECT
+    CONCAT(UPPER(dim_customer.first_name), ' ', UPPER(dim_customer.last_name)) AS full_name,
+    dim_category.name AS category,
+    SUM(fact_rental.amount) AS amount
+FROM
+    fact_rental
+    INNER JOIN dim_customer ON dim_customer.customer_id = fact_rental.customer_id
+    INNER JOIN dim_category ON dim_category.category_id = fact_rental.category_id
+GROUP BY
+    full_name,
+    category
+ORDER BY
+    full_name,
+    category,
+    amount
+LIMIT 30;
+
+```
+
