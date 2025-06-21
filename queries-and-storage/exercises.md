@@ -621,3 +621,34 @@ WHERE
     rank_movies = 1;
 
 ```
+
+
+#### Exercise 10.1 - (Optional)
+
+Use the `dim_actor` as the main table for this query. Perform the following joins:
+* `dim_actor` and `bridge_actor` table on the `actor_id`.
+* `fact_rental` and `bridge_actor` on the `rental_id`.
+* `dim_film` and `fact_rental` on the `film_id`.
+
+Then, select the distinct `dim_actor.actor_id`, `dim_actor.first_name`, `dim_actor.last_name` and `dim_film.film_id` combinations. Limit your results to 20 rows; To compare with the expected output, you can order by `dim_actor.actor_id` and `dim_film.film_id`.
+
+
+```sql
+
+%%sql
+SELECT DISTINCT 
+    dim_actor.actor_id,
+    dim_actor.first_name,
+    dim_actor.last_name,
+    dim_film.film_id
+FROM
+    dim_actor
+    INNER JOIN bridge_actor ON dim_actor.actor_id = bridge_actor.actor_id
+    INNER JOIN fact_rental ON fact_rental.rental_id =bridge_actor.rental_id
+    INNER JOIN dim_film ON fact_rental.film_id = dim_film.film_id
+ORDER BY
+    dim_actor.actor_id,
+    dim_film.film_id
+LIMIT 20;
+
+```
