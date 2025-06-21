@@ -1,3 +1,53 @@
 ### ER
 
 ![./images/er.png](./images/er.png)
+
+
+
+### Exercise 1
+
+Write an SQL query to get the total amount obtained from the renting of Travel, Family, and Children films during the months of June and July of 2005. Present the results grouped and ordered by store id and category name.
+
+- You can start by filling in the section starting from the keyword `FROM`. You will need to join `fact_rental` and `dim_category` tables by the `category_id` column.
+- To filter required records, fill in the section after the clause `WHERE`. To get the three different category names, you can pass an [array](https://www.tutorialspoint.com/passing-an-array-to-a-query-using-where-clause-in-mysql) `('Travel', 'Family', 'Children')`. The `rental_date` should be [`BETWEEN`](https://www.w3schools.com/mysql/mysql_between.asp) `'2005-06-01'` and `'2005-08-01'`. Note that you will need to use the `AND` clause between those two conditions.
+- Group by the `store_id` and the category name and order by the same two columns.
+- Fill in the section after the `SELECT` clause to show `store_id`, category name and `SUM()` of the `amount`.
+
+*Note*: Remember that a good practice when exploring your tables for the first time is to set a `LIMIT`, mostly if you want to get all columns from a table with the `*` wildcard.
+
+```sql
+SELECT
+    store_id,
+    dim_category.name AS category_name,
+    SUM(amount) AS total_amount
+FROM
+    fact_rental
+    INNER JOIN dim_category ON dim_category.category_id = fact_rental.category_id
+WHERE
+    dim_category.name IN ('Travel', 'Family', 'Children')
+    AND fact_rental.rental_date BETWEEN '2005-06-01' AND '2005-08-01'
+GROUP BY
+    store_id,
+    dim_category.name
+ORDER BY
+    store_id,
+    dim_category.name;
+
+```
+
+#### Exercise 2.1 - (Optional)
+
+You can start by creating a query to extract the `category_id` and `film_id` from the `fact_rental`. Use [`DISTINCT`](https://www.w3schools.com/sql/sql_distinct.asp) and `LIMIT`. To compare your results with the expected output, you can order by the `category_id` and `film_id`.
+
+
+```sql
+SELECT DISTINCT 
+    category_id, 
+    film_id
+FROM
+    fact_rental
+ORDER BY
+    category_id,
+    film_id
+LIMIT 10;
+```
