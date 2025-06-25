@@ -1,0 +1,14 @@
+Files.zip
+.spotify
+**/*.jar
+**/*.so
+**/*.dll
+.venv
+modeling/spark/pyspark_env/
+modeling/.venv/
+spark/artifacts/
+pyspark_env/
+modeling/spark/artifacts/
+*.zip
+Files (1).zip
+Files_modeling.zip

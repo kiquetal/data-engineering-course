@@ -1,0 +1,84 @@
+# Jupyter Notebook with PySpark Commands
+
+## Setup Commands
+
+# Activate your PySpark environment
+source pyspark_env/bin/activate
+
+# Start Jupyter notebook
+jupyter notebook
+
+## Alternative: Start Jupyter lab if you prefer that interface
+# jupyter lab
+
+## Kernel Management
+
+# List available Jupyter kernels
+jupyter kernelspec list
+
+# If your PySpark kernel is not showing up, you can manually install it:
+python -m ipykernel install --user --name=pyspark_kernel --display-name="PySpark 4.0.0"
+
+## Environment Variables for PySpark
+
+# Set these variables before starting Jupyter if you encounter issues
+export PYSPARK_DRIVER_PYTHON=jupyter
+export PYSPARK_DRIVER_PYTHON_OPTS='notebook'
+export PYSPARK_PYTHON=$(which python)
+export JAVA_HOME=/usr/lib/jvm/default-java
+export PYSPARK_SUBMIT_ARGS="--conf spark.driver.extraJavaOptions=-Djava.security.manager=allow --conf spark.executor.extraJavaOptions=-Djava.security.manager=allow pyspark-shell"
+
+## Check PySpark Installation
+
+# Run this in a notebook cell to verify your Spark setup
+import pyspark
+print(f"PySpark version: {pyspark.__version__}")
+
+from pyspark.sql import SparkSession
+spark = SparkSession.builder.appName("SparkTest").master("local[*]").config("spark.driver.extraJavaOptions", "-Djava.security.manager=allow").config("spark.executor.extraJavaOptions", "-Djava.security.manager=allow").getOrCreate()
+print(f"Spark version: {spark.version}")
+
+# IMPORTANT: SAFELY CREATE OR REUSE EXISTING SPARK SESSION IN JUPYTER
+# This prevents the "Another SparkContext is being constructed" error
+from pyspark.sql import SparkSession
+from pyspark import SparkContext
+
+# First check if a SparkContext already exists and stop it if it does
+sc = SparkContext._active_spark_context
+if sc is not None:
+    print("Found existing SparkContext, stopping it first")
+    sc.stop()
+
+# Then create a new SparkSession with required security config
+spark = (SparkSession.builder
+         .appName("SparkTest")
+         .master("local[*]")
+         .config("spark.driver.extraJavaOptions", "-Djava.security.manager=allow")
+         .config("spark.executor.extraJavaOptions", "-Djava.security.manager=allow")
+         .getOrCreate())
+print(f"Spark version: {spark.version}")
+
+## Handling Permission Issues
+
+# If you encounter permission issues with the artifacts directory, run:
+mkdir -p artifacts
+chmod -R 777 artifacts
+
+# You can also use a temporary directory in your notebook:
+import tempfile
+import os
+tmp_dir = tempfile.mkdtemp()
+os.environ['SPARK_LOCAL_DIRS'] = tmp_dir
+print(f"Using temporary directory: {tmp_dir}")
+
+## Exiting and Cleanup
+
+# In your last notebook cell, always stop the SparkSession:
+spark.stop()
+
+# Clean up temporary directory if you used one:
+import shutil
+shutil.rmtree(tmp_dir)
+
+## Running PySpark directly from terminal (alternative to notebook)
+# pyspark --conf spark.driver.extraJavaOptions=-Djava.security.manager=allow --conf spark.executor.extraJavaOptions=-Djava.security.manager=allow

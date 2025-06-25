@@ -1,0 +1,41 @@
+# dbt_project.yml
+
+# This is the main dbt project configuration file.
+# You can set project-level configurations here, such as model paths, version, and more.
+
+name: 'my_dbt_project'
+version: '1.0.0'
+config-version: 2
+
+# Paths for dbt models, seeds, snapshots, etc.
+model-paths: ["models"]
+seed-paths: ["seeds"]
+snapshot-paths: ["snapshots"]
+
+# Example: Set default materialization for all models
+models:
+  my_dbt_project:
+    +materialized: view
+
+# Example: Organize your star schema models
+# Place your fact and dimension models in subfolders under 'models/'
+# For example:
+#   models/
+#     star_schema/
+#       dim_customer.sql
+#       dim_product.sql
+#       fact_sales.sql
+
+# Example: Override materialization for a specific model
+models:
+  my_dbt_project:
+    +materialized: view
+    star_schema:
+      dim_customer:
+        +materialized: table
+      fact_sales:
+        +materialized: incremental
+
+# For more options, see: https://docs.getdbt.com/reference/dbt_project-yml
+# For model configuration, see: https://docs.getdbt.com/reference/model-configs
+# For organizing models, see: https://docs.getdbt.com/docs/build/projects#organizing-models

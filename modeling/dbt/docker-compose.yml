@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:15
+    container_name: dbt_postgres
+    environment:
+      POSTGRES_USER: dbt_user
+      POSTGRES_PASSWORD: dbt_pass
+      POSTGRES_DB: dbt_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  dbt:
+    image: ghcr.io/dbt-labs/dbt-postgres:1.7.9
+    container_name: dbt_cli
+    depends_on:
+      - postgres
+    environment:
+      DBT_PROFILES_DIR: /dbt/profiles
+    volumes:
+      - ./models:/dbt/models
+      - ./seeds:/dbt/seeds
+      - ./snapshots:/dbt/snapshots
+      - ./dbt_project.yml:/dbt/dbt_project.yml
+      - ./profiles:/dbt/profiles
+    working_dir: /dbt
+    entrypoint: ["tail", "-f", "/dev/null"] # Keeps the container running for interactive use
+
+volumes:
+  postgres_data:
